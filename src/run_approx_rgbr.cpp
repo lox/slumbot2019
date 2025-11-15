@@ -135,7 +135,7 @@ private:
   Node *p0_node_;
   Node *p1_node_;
   int pbd_;
-  const string &action_sequence_;
+  string action_sequence_;
   const ReachProbs *reach_probs_;
   shared_ptr<double []> ret_vals_;
   int total_num_samples_;

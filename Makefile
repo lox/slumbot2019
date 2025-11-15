@@ -15,10 +15,16 @@ HEADS =	src/fast_hash.h src/rand.h src/constants.h src/files.h src/cards.h src/i
 	src/nb_socket_io.h src/server.h src/match_state.h src/acpc_protocol.h src/bot.h \
 	src/acpc_server.h src/mp_ecfr_node.h src/mp_ecfr.h
 
+UNAME_S := $(shell uname -s)
+
 # -Wl,--no-as-needed fixes my problem of undefined reference to
-# pthread_create (and pthread_join).  Comments I found on the web indicate
-# that these flags are a workaround to a gcc bug.
+# pthread_create (and pthread_join) on Linux.  Apple's ld does not support
+# the flag, so gate it on the platform.
+ifeq ($(UNAME_S),Darwin)
+LIBRARIES = -pthread
+else
 LIBRARIES = -pthread -Wl,--no-as-needed
+endif
 
 # For profiling:
 # LDFLAGS = -pg
@@ -32,7 +38,8 @@ LDFLAGS =
 # CFLAGS = -std=c++17 -Wall -O3 -march=native -ffast-math -g -pg
 # Can also try:
 # CFLAGS = -std=c++17 -Wall -g -pg
-CFLAGS = -std=c++17 -Wall -O3 -march=native -ffast-math -flto -Wno-alloc-size-larger-than
+CFLAGS = -std=c++17 -Wall -O3 -march=native -ffast-math -flto -Wno-alloc-size-larger-than \
+	-include src/drand48_compat.h
 
 obj/%.o:	src/%.cpp $(HEADS)
 		gcc $(CFLAGS) -c -o $@ $<
