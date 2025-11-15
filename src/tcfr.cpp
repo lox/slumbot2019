@@ -1809,7 +1809,7 @@ void TCFR::Prepare(void) {
 
   // Should get amount of RAM from method in Files class
   // if (allocation_size > 1180000000000ULL) {
-  if (allocation_size > 32000000000ULL) {
+  if (allocation_size > 600000000000ULL) {
     fprintf(stderr, "Allocation size %llu too big\n", allocation_size);
     exit(-1);
   }

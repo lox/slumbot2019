@@ -1,0 +1,10 @@
+# Deep-stacked 6-max abstraction with multiple raise tiers
+BettingAbstractionName mb6max_full
+Limit false
+StackSize 20000
+Asymmetric false
+MinBet 200
+MaxBets 3,3,2,2
+AlwaysAllIn true
+BetSizes 0.5,1.0,2.5;0.5,1.0,2.5;0.5,1.0,2.5|0.5,1.0,2.5;0.5,1.0,2.5;0.5,1.0,2.5|0.75,1.5;0.75,1.5|1.0,2.0;1.0,2.0
+ReentrantStreets 1,2,3
